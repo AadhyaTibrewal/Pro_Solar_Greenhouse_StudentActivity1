@@ -83,9 +83,18 @@ function draw()
   makeRay();
   
   //Calculate Wattage
-  
-  
-  
+  pan1_Wattage=round(absorbed1*0.15)
+  pan2_Wattage=round(absorbed1*0.15)
+  if(power_gen>=8 && temp>=30){
+  fan.changeAnimation("run")
+  temp-=1
+   pan2_Wattage-=1
+  }
+  if(power_gen>=4 && temp>=30){
+  fan2.changeAnimation("run")
+  temp-=0.5
+   pan1_Wattage-=1
+  }
   
   // Write conditions to start the first fan will be temp should be more than 30 and power_gen > =4.
   //And the second fan will start when temp >= 30 and power_gen >= 4.
@@ -123,10 +132,20 @@ function makeRay()
      
      
    }
-  
+  raysGroup.overlap(pan1,charge1)
+  raysGroup.overlap(pan2,charge2)
 }
 //Create function for charge1, charge2 & temp_rise
+function charge1(sprA){
+  sprA.remove()
+  absorbed1+=1
+}
+function charge2(sprA){
+  sprA.remove()
+  absorbed2+=1
+}
 
+  
 
 
 
